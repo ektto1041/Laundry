@@ -1,4 +1,4 @@
-qpackage com.mobileteam.laundry;
+package com.mobileteam.laundry;
 
 import androidx.appcompat.app.AppCompatActivity;
 
