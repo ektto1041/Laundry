@@ -1,3 +1,49 @@
 <resources>
-    <string name="app_name">Laundry</string>
+    <string name="app_name">My Application</string>
+
+    <string-array name="how_list">
+            android:textsize="15dp"
+        <item>세탁기</item>
+        <item>물세탁</item>
+        <item>세탁기만</item>
+    </string-array>
+
+    <string-array name="strength_list">
+        <item>강</item>
+        <item>약</item>
+    </string-array>
+
+    <string-array name="detergent_list">
+        <item>상관없음</item>
+        <item>중성세제</item>
+    </string-array>
+
+    <string-array name="temperature_list">
+        <item>95ºC</item>
+        <item>60ºC</item>
+        <item>40ºC</item>
+        <item>30ºC</item>
+    </string-array>
+
+    <string-array name="color_list">
+        <item>White</item>
+        <item>Gray</item>
+        <item>Black</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Cyan</item>
+        <item>Yellow</item>
+        <item>Magenta</item>
+    </string-array>
+
+    <string-array name="texture_list">
+        <item>가죽</item>
+        <item>벨벳</item>
+        <item>울</item>
+        <item>나일론</item>
+        <item>삼베</item>
+        <item>실크</item>
+    </string-array>
+
 </resources>
