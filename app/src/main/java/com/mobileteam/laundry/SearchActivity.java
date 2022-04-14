@@ -2,17 +2,13 @@ package com.mobileteam.laundry;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -20,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.navigation.NavigationBarView;
+import com.mobileteam.laundry.adapter.ColorSearchAdapter;
+import com.mobileteam.laundry.adapter.TextureSearchAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<String> textures = new ArrayList<String>();
