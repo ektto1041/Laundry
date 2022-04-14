@@ -3,14 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2518518518518518" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/color_item.xml" value="0.32051282051282054" />
-        <entry key="app/src/main/res/layout/custom_texture.xml" value="0.36614583333333334" />
-        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.2518518518518518" />
-        <entry key="app/src/main/res/layout/texture_item.xml" value="0.67" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21372897383095577" />
+        <entry key="app/src/main/res/layout/acitivity_closet.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/closet_item.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/color_item.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/custom_texture.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/texture_item.xml" value="0.19610507246376813" />
       </map>
     </option>
   </component>

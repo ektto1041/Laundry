@@ -1,4 +1,4 @@
-package com.mobileteam.laundry;
+package com.mobileteam.laundry.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,14 +8,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mobileteam.laundry.R;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TextureSearchAdapter extends RecyclerView.Adapter<TextureSearchAdapter.ViewHolder>{
     static private String[] txtData;
     private LayoutInflater txtInflater;
 
-    TextureSearchAdapter(Context context, ArrayList<String> data) {
+    public TextureSearchAdapter(Context context, ArrayList<String> data) {
         txtInflater = LayoutInflater.from(context);
         txtData = data.toArray(new String[0]);
     }

@@ -1,4 +1,4 @@
-package com.mobileteam.laundry;
+package com.mobileteam.laundry.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mobileteam.laundry.R;
+
 import java.util.ArrayList;
 
 public class ColorSearchAdapter extends RecyclerView.Adapter<ColorSearchAdapter.ViewHolder> {
@@ -16,7 +18,7 @@ public class ColorSearchAdapter extends RecyclerView.Adapter<ColorSearchAdapter.
     static private String[] colData;
     private LayoutInflater colInflater;
 
-    ColorSearchAdapter(Context context, ArrayList<String> data) {
+    public ColorSearchAdapter(Context context, ArrayList<String> data) {
         colInflater = LayoutInflater.from(context);
         colData = data.toArray(new String[0]);
     }
