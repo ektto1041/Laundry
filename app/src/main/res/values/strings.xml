@@ -38,6 +38,10 @@
     </string-array>
 
     <string-array name="texture_list">
+        <item>면</item>
+        <item>폴리에스테르</item>
+        <item>데님</item>
+        <item>니트</item>
         <item>가죽</item>
         <item>벨벳</item>
         <item>울</item>
