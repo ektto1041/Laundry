@@ -1,4 +1,4 @@
-package com.mobileteam.laundry.domain;
+package com.mobileteam.laundry;
 
 public class Cloth {
     private int src;

@@ -8,8 +8,8 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mobileteam.laundry.Cloth;
 import com.mobileteam.laundry.R;
-import com.mobileteam.laundry.domain.Cloth;
 
 import java.util.ArrayList;
 import java.util.List;
