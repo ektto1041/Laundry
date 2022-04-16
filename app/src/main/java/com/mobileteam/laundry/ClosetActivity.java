@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobileteam.laundry.adapter.ClosetAdapter;
-import com.mobileteam.laundry.domain.Cloth;
 
 import java.util.ArrayList;
 
