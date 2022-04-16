@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_height">75dp</dimen>
+    <dimen name="header_button_padding">20dp</dimen>
+    <dimen name="main_add_button_size">250dp</dimen>
+    <dimen name="bottom_nav_height">75dp</dimen>
+    <dimen name="bottom_nav_selected_button_padding">10dp</dimen>
+    <dimen name="bottom_nav_button_padding">20dp</dimen>
+</resources>
