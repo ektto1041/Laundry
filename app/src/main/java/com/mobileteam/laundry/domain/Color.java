@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "COLORS")
 public class Color {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     @ColumnInfo(name = "clothes_id")
@@ -14,4 +14,28 @@ public class Color {
 
     @ColumnInfo(name = "color_name")
     private int colorName;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getClothesId() {
+        return clothesId;
+    }
+
+    public void setClothesId(int clothesId) {
+        this.clothesId = clothesId;
+    }
+
+    public int getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(int colorName) {
+        this.colorName = colorName;
+    }
 }

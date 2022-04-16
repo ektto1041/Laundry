@@ -3,15 +3,23 @@ package com.mobileteam.laundry;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.mobileteam.laundry.domain.Clothes;
 import com.mobileteam.laundry.enums.Mode;
 
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class MainActivity extends AppCompatActivity {
+    private LaundryDatabase db;
+
     private ConstraintLayout header;
     private ImageButton addButton;
     private ImageButton laundryButton;
@@ -32,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     // 앱이 처음 실행되었을 때 데이터를 세팅해주는 메소드
     private void initSetting() {
         AppData.setMode(Mode.LAUNDRY);
+
+        // DB 세팅
+        db = Room.databaseBuilder(getApplicationContext(), LaundryDatabase.class, "laundry").build();
     }
 
     // 멤버 View 변수들을 초기화 하는 메소드
@@ -101,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
         dryButton.setOnClickListener(this::onBottomButtonClicked);
         ironButton.setOnClickListener(this::onBottomButtonClicked);
 
+        // TODO: Room DB 연결 확인을 위한 테스트 코드
+        // 옷 추가 버튼 onClick
+        addButton.setOnClickListener(v -> {
+            db.clothesDao().insert(new Clothes("Strong"))
+                    .doOnSuccess(id -> Log.d("#####", "" + id))
+                    .doOnError(e -> Log.d("#####", e.toString()))
+                    .subscribeOn(Schedulers.io()).subscribe();
+        });
     }
 
     public void onSearchClicked() {

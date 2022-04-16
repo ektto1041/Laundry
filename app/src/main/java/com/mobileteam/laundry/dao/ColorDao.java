@@ -5,8 +5,10 @@ import androidx.room.Insert;
 
 import com.mobileteam.laundry.domain.Color;
 
+import io.reactivex.rxjava3.core.Single;
+
 @Dao
 public interface ColorDao {
     @Insert
-    public long insert(Color color);
+    public Single<Long> insert(Color color);
 }
