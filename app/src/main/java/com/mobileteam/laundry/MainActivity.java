@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     // AppData 의 Mode 에 따라 레이아웃을 갱신하는 메소드
     private void layoutRefresh() {
-        int color = R.color.black;
+        int color = AppData.getModeColor();
 
         // Selected Padding & padding
         int sp = (int)getResources().getDimension(R.dimen.bottom_nav_selected_button_padding);
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch(AppData.getMode()) {
             case LAUNDRY:
-                color = R.color.aespa_red;
                 laundryButton.setColorFilter(ContextCompat.getColor(this, color), android.graphics.PorterDuff.Mode.SRC_IN);
                 laundryButton.setPadding(sp, sp, sp, sp);
                 dryButton.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 ironButton.setPadding(p, p, p, p);
                 break;
             case DRY:
-                color = R.color.aespa_blue;
                 laundryButton.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
                 laundryButton.setPadding(p, p, p, p);
                 dryButton.setColorFilter(ContextCompat.getColor(this, color), android.graphics.PorterDuff.Mode.SRC_IN);
@@ -71,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 ironButton.setPadding(p, p, p, p);
                 break;
             case IRON:
-                color = R.color.aespa_yellow;
                 laundryButton.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
                 laundryButton.setPadding(p, p, p, p);
                 dryButton.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
