@@ -7,7 +7,7 @@
     tools:context=".SearchActivity">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/banner"
         android:layout_width="411dp"
         android:layout_height="86dp"
         android:background="#4DCC52"
@@ -22,7 +22,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view">
+        app:layout_constraintTop_toBottomOf="@+id/banner">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ser_texture"
@@ -97,7 +97,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/colorview"
-                    android:layout_width="390dp"
+                    android:layout_width="367dp"
                     android:layout_height="53dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -258,6 +258,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.4" />
+
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="search"
+                android:text="찾기"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.937" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
