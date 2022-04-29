@@ -2,7 +2,9 @@ package com.mobileteam.laundry;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,11 +17,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.mobileteam.laundry.adapter.ColorSearchAdapter;
 import com.mobileteam.laundry.adapter.TextureSearchAdapter;
+import com.mobileteam.laundry.domain.Clothes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<String> textures = new ArrayList<String>();
@@ -32,6 +41,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        View banner = findViewById(R.id.banner);
+        banner.setBackgroundColor(getColor(AppData.getModeColor()));
 
         //옷 재질을 표시해주는 리사이클러 뷰
         RecyclerView textureview = findViewById(R.id.textureview);
@@ -98,6 +110,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             }
             public void onNothingSelected(AdapterView<?> arg0) {}
         });
+
+
+        Button btn_search = findViewById(R.id.btn_search);
+        btn_search.setBackgroundColor(getColor(AppData.getModeColor()));
     }
 
     //옷 색상추가 대화상자 열기
@@ -159,4 +175,19 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
         searchtexture.show();
     }
+
+    public void search(View v) {
+        //db 세팅
+        LaundryDatabase db = Room.databaseBuilder(getApplicationContext(), LaundryDatabase.class, "laundry").build();
+        Intent intent = new Intent(this, ClosetActivity.class);
+        db.clothesDao().getAll().doOnSuccess(list -> {
+            intent.putExtra("searched",(Serializable) list);
+            setResult(RESULT_OK, intent);
+        }).doOnError(e -> setResult(RESULT_CANCELED))
+                .subscribeOn(Schedulers.io()).subscribe();
+
+        startActivity(intent);
+
+    }
+
 }
