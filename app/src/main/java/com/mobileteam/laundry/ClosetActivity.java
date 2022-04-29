@@ -16,7 +16,7 @@ public class ClosetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_closet);
+        setContentView(R.layout.activity_closet);
 
         // 임시 옷 데이터
         ArrayList<Cloth> data = new ArrayList<>();
