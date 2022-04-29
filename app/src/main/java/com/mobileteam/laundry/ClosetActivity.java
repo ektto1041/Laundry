@@ -17,7 +17,7 @@ public class ClosetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_closet);
+        setContentView(R.layout.activity_closet);
 
         // header 색 변경
         View header = findViewById(R.id.header);
