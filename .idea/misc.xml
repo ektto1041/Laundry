@@ -3,10 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/button_pattern.xml" value="0.125" />
+        <entry key="app/src/main/res/drawable/ic_add_circle.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/ic_dry.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_laundry.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_menu_icon_svg.xml" value="0.231" />
-        <entry key="app/src/main/res/layout/acitivity_closet.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/acitivity_closet.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_closet.xml" value="0.2829025268554688" />
+        <entry key="app/src/main/res/layout/activity_kind.xml" value="0.3123260498046876" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/closet_item.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/color_item.xml" value="0.19610507246376813" />
