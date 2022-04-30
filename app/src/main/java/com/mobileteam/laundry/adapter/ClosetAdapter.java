@@ -1,5 +1,6 @@
 package com.mobileteam.laundry.adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobileteam.laundry.Cloth;
 import com.mobileteam.laundry.R;
+import com.mobileteam.laundry.domain.Clothes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +26,11 @@ public class ClosetAdapter extends RecyclerView.Adapter<ClosetAdapter.ViewHolder
         }
     }
 
-    public ClosetAdapter(List<Cloth> data) {
+    public ClosetAdapter(List<Clothes> data) {
         this.data = data;
     }
 
-    private List<Cloth> data;
+    private List<Clothes> data;
 
     @NonNull
     @Override
@@ -42,7 +44,13 @@ public class ClosetAdapter extends RecyclerView.Adapter<ClosetAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.closetItemButton.setImageResource(data.get(position).getSrc());
+        Bitmap image = data.get(position).getImage();
+        if(image == null) {
+            // 등록된 이미지가 없으면
+            holder.closetItemButton.setImageResource(R.drawable.ic_add_circle);
+        } else {
+            holder.closetItemButton.setImageBitmap(image);
+        }
     }
 
     @Override
