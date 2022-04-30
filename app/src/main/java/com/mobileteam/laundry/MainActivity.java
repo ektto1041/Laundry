@@ -18,8 +18,6 @@ import com.mobileteam.laundry.enums.Mode;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-    private LaundryDatabase db;
-
     private ConstraintLayout header;
     private ImageButton addButton;
     private ImageButton laundryButton;
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         AppData.setMode(Mode.LAUNDRY);
 
         // DB 세팅
-        db = Room.databaseBuilder(getApplicationContext(), LaundryDatabase.class, "laundry").build();
+        AppData.setDb(getApplicationContext());
     }
 
     // 멤버 View 변수들을 초기화 하는 메소드
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Room DB 연결 확인을 위한 테스트 코드
         // 옷 추가 버튼 onClick
         addButton.setOnClickListener(v -> {
-            db.clothesDao().insert(new Clothes("Strong"))
+            AppData.getDb().clothesDao().insert(new Clothes("Strong", "Strong", "No", "90", null))
                     .doOnSuccess(id -> Log.d("#####", "" + id))
                     .doOnError(e -> Log.d("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();

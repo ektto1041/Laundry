@@ -178,15 +178,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     public void search(View v) {
         //db 세팅
-        LaundryDatabase db = Room.databaseBuilder(getApplicationContext(), LaundryDatabase.class, "laundry").build();
         Intent intent = new Intent(this, ClosetActivity.class);
-        db.clothesDao().getAll().doOnSuccess(list -> {
+        AppData.getDb().clothesDao().getAll().doOnSuccess(list -> {
+            Log.d("#####", "" + list.size());
             intent.putExtra("searched",(Serializable) list);
             setResult(RESULT_OK, intent);
-        }).doOnError(e -> setResult(RESULT_CANCELED))
+            startActivity(intent);
+        }).doOnError(e -> Log.e("#####", e.toString()))
                 .subscribeOn(Schedulers.io()).subscribe();
 
-        startActivity(intent);
+
 
     }
 
