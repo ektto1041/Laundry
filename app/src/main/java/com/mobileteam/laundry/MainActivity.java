@@ -13,7 +13,11 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.enums.Detergent;
 import com.mobileteam.laundry.enums.Mode;
+import com.mobileteam.laundry.enums.Temperature;
+import com.mobileteam.laundry.enums.WashingPower;
+import com.mobileteam.laundry.enums.WashingType;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -113,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Room DB 연결 확인을 위한 테스트 코드
         // 옷 추가 버튼 onClick
         addButton.setOnClickListener(v -> {
-            AppData.getDb().clothesDao().insert(new Clothes("Strong", "Strong", "No", "90", null))
+            AppData.getDb().clothesDao().insert(new Clothes(WashingType.WASHER, WashingPower.STRONG, Detergent.ANY, Temperature._40, null))
                     .doOnSuccess(id -> Log.d("#####", "" + id))
                     .doOnError(e -> Log.d("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();

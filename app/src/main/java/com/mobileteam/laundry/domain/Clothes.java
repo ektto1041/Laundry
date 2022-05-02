@@ -7,6 +7,10 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.mobileteam.laundry.R;
+import com.mobileteam.laundry.enums.Detergent;
+import com.mobileteam.laundry.enums.Temperature;
+import com.mobileteam.laundry.enums.WashingPower;
+import com.mobileteam.laundry.enums.WashingType;
 
 import java.io.Serializable;
 
@@ -16,16 +20,16 @@ public class Clothes implements Serializable {
     private int id;
 
     @ColumnInfo(name = "washing_type")
-    private String washingType;
+    private WashingType washingType;
 
     @ColumnInfo(name = "washing_power")
-    private String washingPower;
+    private WashingPower washingPower;
 
     @ColumnInfo(name = "detergent")
-    private String detergent;
+    private Detergent detergent;
 
     @ColumnInfo(name = "temperature")
-    private String temperature;
+    private Temperature temperature;
 
     @ColumnInfo(name = "image")
     private Bitmap image;
@@ -38,35 +42,35 @@ public class Clothes implements Serializable {
         this.id = id;
     }
 
-    public String getWashingType() {
+    public WashingType getWashingType() {
         return washingType;
     }
 
-    public void setWashingType(String washingType) {
+    public void setWashingType(WashingType washingType) {
         this.washingType = washingType;
     }
 
-    public String getWashingPower() {
+    public WashingPower getWashingPower() {
         return washingPower;
     }
 
-    public void setWashingPower(String washingPower) {
+    public void setWashingPower(WashingPower washingPower) {
         this.washingPower = washingPower;
     }
 
-    public String getDetergent() {
+    public Detergent getDetergent() {
         return detergent;
     }
 
-    public void setDetergent(String detergent) {
+    public void setDetergent(Detergent detergent) {
         this.detergent = detergent;
     }
 
-    public String getTemperature() {
+    public Temperature getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(Temperature temperature) {
         this.temperature = temperature;
     }
 
@@ -78,7 +82,7 @@ public class Clothes implements Serializable {
         this.image = image;
     }
 
-    public Clothes(String washingType, String washingPower, String detergent, String temperature, Bitmap image) {
+    public Clothes(WashingType washingType, WashingPower washingPower, Detergent detergent, Temperature temperature, Bitmap image) {
         this.washingType = washingType;
         this.washingPower = washingPower;
         this.detergent = detergent;
