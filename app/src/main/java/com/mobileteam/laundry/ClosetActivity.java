@@ -33,7 +33,7 @@ public class ClosetActivity extends AppCompatActivity {
         RecyclerView closetRecyclerView = (RecyclerView) findViewById(R.id.closet_recycler_view);
         int closetColumn = 3;
         closetRecyclerView.setLayoutManager(new GridLayoutManager(this, closetColumn));
-        final ClosetAdapter closetAdapter = new ClosetAdapter(data);
+        final ClosetAdapter closetAdapter = new ClosetAdapter(this, data);
         closetRecyclerView.setAdapter(closetAdapter);
 
         // intent 에서 데이터 가져오는 과정

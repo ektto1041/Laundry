@@ -114,17 +114,14 @@ public class MainActivity extends AppCompatActivity {
         dryButton.setOnClickListener(this::onBottomButtonClicked);
         ironButton.setOnClickListener(this::onBottomButtonClicked);
 
-        // TODO: Room DB 연결 확인을 위한 테스트 코드
         // 옷 추가 버튼 onClick
         addButton.setOnClickListener(v -> {
-            AppData.getDb().clothesDao().insert(new Clothes(WashingType.WASHER, WashingPower.STRONG, Detergent.ANY, Temperature._40, ClothesColor.BLACK, null))
+            AppData.getDb().clothesDao().insert(new Clothes(null, null, null, null, ClothesColor.BLACK, null))
                     .doOnSuccess(id -> {
-                        Log.d("#####", "" + id);
-
-                        AppData.getDb().textureDao().insert(new Texture(id, "폴리에스테르"))
-                                .doOnSuccess(tid -> Log.d("#####", "texture: " + tid))
-                                .doOnError(e -> Log.d("#####", e.toString()))
-                                .subscribeOn(Schedulers.io()).subscribe();
+                        Intent intent = new Intent(this, DetailActivity.class);
+                        intent.putExtra("clothesId", id);
+                        setResult(RESULT_OK, intent);
+                        startActivity(intent);
                     })
                     .doOnError(e -> Log.d("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();

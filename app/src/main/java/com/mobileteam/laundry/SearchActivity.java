@@ -32,11 +32,10 @@ import java.util.ArrayList;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
-    ArrayList<String> textures = new ArrayList<String>();
+    ArrayList<String> textures = new ArrayList<>();
     ArrayList<ClothesColor> colors = new ArrayList<>();
     TextureSearchAdapter textureAdapter;
     ColorSearchAdapter colorAdapter;
-    boolean txtfound = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,32 +152,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         Dialog searchtexture = new Dialog(this);
         searchtexture.setContentView(R.layout.custom_texture);
         searchtexture.setTitle("재질 검색");
-        CharSequence[] texturelist = getResources().getStringArray(R.array.texture_list);
-        Toast.makeText(getApplicationContext(), texturelist[0], Toast.LENGTH_LONG);
-        Button search = searchtexture.findViewById(R.id.btn_texture);
-        ArrayList<String> choice = new ArrayList<String>();
+
         final EditText input = (EditText) searchtexture.findViewById(R.id.edit_texture);
 
-        search.setOnClickListener(new View.OnClickListener() {
+        searchtexture.findViewById(R.id.btn_texture).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                for(int i = 0; i < texturelist.length; i++) {
-                    if(texturelist[i].toString().equals(input.getText().toString().trim())){
-                        textures.add(texturelist[i].toString());
-                        txtfound = true;
-                        break;
-                    }
-                }
-                if(!txtfound) {
-                    Toast.makeText(getApplicationContext(), "지원하지 않는 재질입니다.", Toast.LENGTH_LONG).show();
-                    searchtexture.dismiss();
-                }
-                txtfound = false;
-                textureAdapter.update(textures);
+                textures.add(input.getText().toString().trim());
                 textureAdapter.notifyDataSetChanged();
                 searchtexture.dismiss();
             }
         });
+
         searchtexture.show();
     }
 
