@@ -2,7 +2,7 @@
     <string name="app_name">My Application</string>
 
     <string-array name="how_list">
-            android:textsize="15dp"
+        android:textsize="15dp"
         <item>세탁기</item>
         <item>물세탁</item>
         <item>세탁기만</item>

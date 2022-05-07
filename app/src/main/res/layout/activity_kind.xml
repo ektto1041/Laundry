@@ -32,7 +32,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginLeft="252dp"
-        android:layout_marginEnd="92dp"
+        android:layout_marginEnd="4dp"
         android:background="#00000000"
         android:padding="10dp"
         android:scaleType="centerInside"
@@ -43,13 +43,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
     <ImageButton
         android:id="@+id/menu_button3"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginLeft="252dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="84dp"
         android:background="#00000000"
         android:padding="10dp"
         android:scaleType="centerInside"
@@ -69,66 +68,37 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.276"
+        app:layout_constraintVertical_bias="0.232"
         app:srcCompat="@android:drawable/divider_horizontal_dark" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/colorlist"
         android:layout_width="411dp"
-        android:layout_height="45dp"
+        android:layout_height="52dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/header2"
-        app:layout_constraintVertical_bias="0.665">
+        app:layout_constraintVertical_bias="0.605" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_patten"
-            android:text="면" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/texturelist"
+        android:layout_width="411dp"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header2"
+        app:layout_constraintVertical_bias="0.695" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="폴리"
-            android:background="@drawable/button_patten"/>
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="데님"
-            android:background="@drawable/button_patten"/>
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="혼방"
-            android:background="@drawable/button_patten"/>
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="실크"
-            android:background="@drawable/button_patten"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="410dp"
-        android:layout_height="227dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/howtolist"
+        android:layout_width="411dp"
+        android:layout_height="203dp"
         android:background="#FF000000"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,36 +106,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995">
-
-        <ImageButton
-            android:id="@+id/menu_button5"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="#00000000"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_95" />
-
-        <ImageButton
-            android:id="@+id/menu_button6"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="#00000000"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_60" />
-
-        <ImageButton
-            android:id="@+id/menu_button7"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="#00000000"
-            android:padding="10dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_40" />
-
-
-    </LinearLayout>
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
