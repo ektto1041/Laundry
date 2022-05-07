@@ -37,4 +37,13 @@ public interface ClothesDao {
             List<ClothesColor> clothesColorList,
             List<String> textureList
     );
+
+    @Query("SELECT * FROM CLOTHES WHERE id = :clothesId")
+    public Single<Clothes> fineOne(long clothesId);
+
+    @Query("UPDATE CLOTHES SET colors = :clothesColor WHERE id = :clothesId")
+    public Single<Integer> update(long clothesId, ClothesColor clothesColor);
+
+    @Query("DELETE FROM CLOTHES WHERE id = :clothesId")
+    public Single<Integer> delete(long clothesId);
 }

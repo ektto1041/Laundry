@@ -34,49 +34,49 @@ public class Converters {
     // WashingType -> String
     @TypeConverter
     public String fromWashingType(WashingType washingType) {
-        return washingType.name();
+        return washingType == null ? null : washingType.name();
     }
 
     // String -> WashingType
     @TypeConverter
     public WashingType toWashingType(String str) {
-        return WashingType.valueOf(str);
+        return str == null ? null : WashingType.valueOf(str);
     }
 
     // WashingPower -> String
     @TypeConverter
     public String fromWashingPower(WashingPower washingPower) {
-        return washingPower.name();
+        return washingPower == null ? null : washingPower.name();
     }
 
     // String -> WashingPower
     @TypeConverter
     public WashingPower toWashingPower(String str) {
-        return WashingPower.valueOf(str);
+        return str == null ? null : WashingPower.valueOf(str);
     }
 
     // Temperature -> String
     @TypeConverter
     public String fromTemperature(Temperature temperature) {
-        return temperature.name();
+        return temperature == null ? null : temperature.name();
     }
 
     // String -> Temperature
     @TypeConverter
     public Temperature toTemperature(String str) {
-        return Temperature.valueOf(str);
+        return str == null ? null : Temperature.valueOf(str);
     }
 
     // Detergent -> String
     @TypeConverter
     public String fromDetergent(Detergent detergent) {
-        return detergent.name();
+        return detergent == null ? null : detergent.name();
     }
 
     // String -> Detergent
     @TypeConverter
     public Detergent toDetergent(String str) {
-        return Detergent.valueOf(str);
+        return str == null ? null : Detergent.valueOf(str);
     }
 
     // Color -> String

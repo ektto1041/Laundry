@@ -1,5 +1,7 @@
 package com.mobileteam.laundry.adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobileteam.laundry.Cloth;
+import com.mobileteam.laundry.DetailActivity;
 import com.mobileteam.laundry.R;
 import com.mobileteam.laundry.domain.Clothes;
 
@@ -23,13 +27,24 @@ public class ClosetAdapter extends RecyclerView.Adapter<ClosetAdapter.ViewHolder
         ViewHolder(View itemView) {
             super(itemView);
             closetItemButton = (ImageButton) itemView.findViewById(R.id.closet_item);
+
+            closetItemButton.setOnClickListener(v -> {
+                Clothes clothes = data.get(getAdapterPosition());
+
+                Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                intent.putExtra("clothesId", clothes.getId());
+                activity.setResult(Activity.RESULT_OK);
+                activity.startActivity(intent);
+            });
         }
     }
 
-    public ClosetAdapter(List<Clothes> data) {
+    public ClosetAdapter(AppCompatActivity activity, List<Clothes> data) {
+        this.activity = activity;
         this.data = data;
     }
 
+    private AppCompatActivity activity;
     private List<Clothes> data;
 
     @NonNull

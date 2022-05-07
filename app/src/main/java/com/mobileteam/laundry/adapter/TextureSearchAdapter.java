@@ -13,28 +13,25 @@ import com.mobileteam.laundry.R;
 import java.util.ArrayList;
 
 public class TextureSearchAdapter extends RecyclerView.Adapter<TextureSearchAdapter.ViewHolder>{
-    static private String[] txtData;
+    private ArrayList<String> data;
     private LayoutInflater txtInflater;
 
     public TextureSearchAdapter(Context context, ArrayList<String> data) {
         txtInflater = LayoutInflater.from(context);
-        txtData = data.toArray(new String[0]);
+        this.data = data;
     }
 
-    public void update(ArrayList<String> list) {
-        txtData = list.toArray(new String[0]);
-    } //리스트 항목을 업데이트
-
     public int getItemCount() {
-        return txtData.length;
+        return data.size();
     } //리스트 항목의 개수를 반환
 
     public String getItem(int id) {
-        return txtData[id];
+        return data.get(id);
     } //해당 인덱스의 리스트 항목을 반환
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView texture;
+
         ViewHolder(View itemView) {
             super(itemView);
             texture = itemView.findViewById(R.id.texture_name);
@@ -47,7 +44,7 @@ public class TextureSearchAdapter extends RecyclerView.Adapter<TextureSearchAdap
     }
 
     public void onBindViewHolder(TextureSearchAdapter.ViewHolder holder, int position) {
-        holder.texture.setText(txtData[position]);
+        holder.texture.setText(data.get(position));
     }
 
 }
