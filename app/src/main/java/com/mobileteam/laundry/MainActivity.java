@@ -3,8 +3,6 @@ package com.mobileteam.laundry;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.domain.Texture;
+import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
 import com.mobileteam.laundry.enums.Mode;
 import com.mobileteam.laundry.enums.Temperature;
@@ -117,8 +117,15 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Room DB 연결 확인을 위한 테스트 코드
         // 옷 추가 버튼 onClick
         addButton.setOnClickListener(v -> {
-            AppData.getDb().clothesDao().insert(new Clothes(WashingType.WASHER, WashingPower.STRONG, Detergent.ANY, Temperature._40, null))
-                    .doOnSuccess(id -> Log.d("#####", "" + id))
+            AppData.getDb().clothesDao().insert(new Clothes(WashingType.WASHER, WashingPower.STRONG, Detergent.ANY, Temperature._40, ClothesColor.BLACK, null))
+                    .doOnSuccess(id -> {
+                        Log.d("#####", "" + id);
+
+                        AppData.getDb().textureDao().insert(new Texture(id, "폴리에스테르"))
+                                .doOnSuccess(tid -> Log.d("#####", "texture: " + tid))
+                                .doOnError(e -> Log.d("#####", e.toString()))
+                                .subscribeOn(Schedulers.io()).subscribe();
+                    })
                     .doOnError(e -> Log.d("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
         });

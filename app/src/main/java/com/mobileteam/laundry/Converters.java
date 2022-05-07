@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 
 import androidx.room.TypeConverter;
 
+import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
 import com.mobileteam.laundry.enums.Temperature;
 import com.mobileteam.laundry.enums.WashingPower;
@@ -76,5 +77,17 @@ public class Converters {
     @TypeConverter
     public Detergent toDetergent(String str) {
         return Detergent.valueOf(str);
+    }
+
+    // Color -> String
+    @TypeConverter
+    public String fromColor(ClothesColor clothesColor) {
+        return clothesColor.name();
+    }
+
+    // String -> Color
+    @TypeConverter
+    public ClothesColor toColor(String str) {
+        return ClothesColor.valueOf(str);
     }
 }
