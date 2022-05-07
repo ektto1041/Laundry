@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/texture_name"
-        android:layout_width="87dp"
-        android:layout_height="28dp"
+        android:layout_width="98dp"
+        android:layout_height="37dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

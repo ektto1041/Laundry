@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSearchClicked() {
         Intent intent = new Intent(this, SearchActivity.class);
+//        Intent intent = new Intent(this, DetailActivity.class); /*임시로 만든 접속 경로*/
         startActivity(intent);
     }
 

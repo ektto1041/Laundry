@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:padding="1dp">
+    android:layout_height="50dp">
 
     <TextView
-        android:id="@+id/colorcheck"
+        android:id="@+id/howtocheck"
         android:layout_width="38dp"
         android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="parent"

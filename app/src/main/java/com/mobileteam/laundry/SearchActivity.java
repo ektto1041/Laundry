@@ -148,6 +148,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         alertDialog.show();
     }
 
+    //재질 검색 대화상자 열기
     public void onClick(View view) {
         Dialog searchtexture = new Dialog(this);
         searchtexture.setContentView(R.layout.custom_texture);
@@ -181,6 +182,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchtexture.show();
     }
 
+    //검색 버튼 명령어
     public void search(View v) {
         //db 세팅
         Intent intent = new Intent(this, ClosetActivity.class);
