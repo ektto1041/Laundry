@@ -6,7 +6,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.mobileteam.laundry.R;
+import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
 import com.mobileteam.laundry.enums.Temperature;
 import com.mobileteam.laundry.enums.WashingPower;
@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Entity(tableName = "CLOTHES")
 public class Clothes implements Serializable {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     @ColumnInfo(name = "washing_type")
     private WashingType washingType;
@@ -31,14 +31,17 @@ public class Clothes implements Serializable {
     @ColumnInfo(name = "temperature")
     private Temperature temperature;
 
+    @ColumnInfo(name = "colors")
+    private ClothesColor clothesColor;
+
     @ColumnInfo(name = "image")
     private Bitmap image;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -74,6 +77,14 @@ public class Clothes implements Serializable {
         this.temperature = temperature;
     }
 
+    public ClothesColor getClothesColor() {
+        return clothesColor;
+    }
+
+    public void setClothesColor(ClothesColor clothesColor) {
+        this.clothesColor = clothesColor;
+    }
+
     public Bitmap getImage() {
         return image;
     }
@@ -82,11 +93,12 @@ public class Clothes implements Serializable {
         this.image = image;
     }
 
-    public Clothes(WashingType washingType, WashingPower washingPower, Detergent detergent, Temperature temperature, Bitmap image) {
+    public Clothes(WashingType washingType, WashingPower washingPower, Detergent detergent, Temperature temperature, ClothesColor clothesColor, Bitmap image) {
         this.washingType = washingType;
         this.washingPower = washingPower;
         this.detergent = detergent;
         this.temperature = temperature;
+        this.clothesColor = clothesColor;
         this.image = image;
     }
 }

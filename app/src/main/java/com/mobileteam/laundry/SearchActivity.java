@@ -17,22 +17,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.mobileteam.laundry.adapter.ColorSearchAdapter;
 import com.mobileteam.laundry.adapter.TextureSearchAdapter;
-import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.enums.ClothesColor;
+import com.mobileteam.laundry.enums.Detergent;
+import com.mobileteam.laundry.enums.Temperature;
+import com.mobileteam.laundry.enums.WashingPower;
+import com.mobileteam.laundry.enums.WashingType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<String> textures = new ArrayList<String>();
-    ArrayList<String> colors = new ArrayList<String>();
+    ArrayList<ClothesColor> colors = new ArrayList<>();
     TextureSearchAdapter textureAdapter;
     ColorSearchAdapter colorAdapter;
     boolean txtfound = false;
@@ -120,22 +121,26 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void open(View view) {
         CharSequence[] items = getResources().getStringArray(R.array.color_list);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        ArrayList<String> choice = new ArrayList<String>();
+        ArrayList<ClothesColor> choice = new ArrayList<>();
 
         builder.setTitle("옷 색상을 선택하시오");
         builder.setMultiChoiceItems(R.array.color_list, null, new DialogInterface.OnMultiChoiceClickListener() {
             public void onClick(DialogInterface dialog, int item, boolean isChecked) {
+                ClothesColor selected = ClothesColor.valueOf(items[item].toString().toUpperCase());
+
                 if(isChecked) {
-                    choice.add(items[item].toString());
+                    choice.add(selected);
                 } else {
-                    choice.remove(items[item].toString());
+                    choice.remove(selected);
                 }
             }
         });
         builder.setNeutralButton("완료", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
-                colors = choice;
-                colorAdapter.update(colors.toArray(new String[0]));
+//                colors = choice;
+//                colorAdapter.update(colors.toArray(new String[0]));
+                colors.clear();
+                colors.addAll(choice);
                 colorAdapter.notifyDataSetChanged();
             }
         });
@@ -179,15 +184,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void search(View v) {
         //db 세팅
         Intent intent = new Intent(this, ClosetActivity.class);
-        AppData.getDb().clothesDao().getAll().doOnSuccess(list -> {
-            Log.d("#####", "" + list.size());
-            intent.putExtra("searched",(Serializable) list);
-            setResult(RESULT_OK, intent);
-            startActivity(intent);
-        }).doOnError(e -> Log.e("#####", e.toString()))
+
+        AppData.getDb().clothesDao().findAll(
+                WashingType.WASHER,
+                WashingPower.STRONG,
+                Detergent.ANY,
+                Temperature._40,
+                colors,
+                textures)
+                .doOnSuccess(list -> {
+                    Log.d("#####", "" + list.size());
+                    intent.putExtra("searched",(Serializable) list);
+                    setResult(RESULT_OK, intent);
+                    startActivity(intent);
+                })
+                .doOnError(e -> Log.e("#####", e.toString()))
                 .subscribeOn(Schedulers.io()).subscribe();
-
-
 
     }
 

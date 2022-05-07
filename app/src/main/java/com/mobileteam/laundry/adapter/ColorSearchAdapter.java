@@ -10,44 +10,46 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobileteam.laundry.R;
+import com.mobileteam.laundry.enums.ClothesColor;
 
 import java.util.ArrayList;
 
 public class ColorSearchAdapter extends RecyclerView.Adapter<ColorSearchAdapter.ViewHolder> {
 
-    static private String[] colData;
+    static private ArrayList<ClothesColor> colData;
     private LayoutInflater colInflater;
 
-    public ColorSearchAdapter(Context context, ArrayList<String> data) {
+    public ColorSearchAdapter(Context context, ArrayList<ClothesColor> data) {
         colInflater = LayoutInflater.from(context);
-        colData = data.toArray(new String[0]);
+        colData = data;
     }
 
-    public void update(String[] list) {
-        colData = list;
-    } //리스트 항목을 업데이트
+//    public void update(String[] list) {
+//        colData = list;
+//    } //리스트 항목을 업데이트
 
     public int getItemCount() {
-        return colData.length;
+        return colData.size();
     } //리스트 항목의 개수를 반환
 
-    public String getItem(int id) {
-        return colData[id];
+    public ClothesColor getItem(int id) {
+        return colData.get(id);
     } //해당 인덱스의 리스트 항목을 반환
 
-    public int getColor(String name) {  //String 값에 해당하는 int 값을 반환
-        switch (name) {
-            case "White": return Color.WHITE;
-            case "Gray": return Color.GRAY;
-            case "Black": return Color.BLACK;
-            case "Red": return Color.RED;
-            case "Green": return Color.GREEN;
-            case "Blue": return Color.BLUE;
-            case "Cyan": return Color.CYAN;
-            case "Yellow": return Color.YELLOW;
-            case "Magenta": return Color.MAGENTA;
+    public int getColor(ClothesColor clothesColor) {  //String 값에 해당하는 int 값을 반환
+        switch (clothesColor) {
+            case WHITE: return Color.WHITE;
+            case GRAY: return Color.GRAY;
+            case BLACK: return Color.BLACK;
+            case RED: return Color.RED;
+            case GREEN: return Color.GREEN;
+            case BLUE: return Color.BLUE;
+            case CYAN: return Color.CYAN;
+            case YELLOW: return Color.YELLOW;
+            case MAGENTA: return Color.MAGENTA;
         }
-        return 000000;
+
+        return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +66,7 @@ public class ColorSearchAdapter extends RecyclerView.Adapter<ColorSearchAdapter.
     }
 
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.color.setBackgroundColor(getColor(colData[position]));
+        holder.color.setBackgroundColor(getColor(colData.get(position)));
     }
 
 }
