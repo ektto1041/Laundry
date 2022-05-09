@@ -5,11 +5,16 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.enums.Bleach;
 import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
+import com.mobileteam.laundry.enums.Dry;
+import com.mobileteam.laundry.enums.DryClean;
+import com.mobileteam.laundry.enums.Iron;
 import com.mobileteam.laundry.enums.Temperature;
 import com.mobileteam.laundry.enums.WashingPower;
 import com.mobileteam.laundry.enums.WashingType;
+import com.mobileteam.laundry.enums.Weave;
 
 import java.util.List;
 
@@ -42,7 +47,37 @@ public interface ClothesDao {
     public Single<Clothes> fineOne(long clothesId);
 
     @Query("UPDATE CLOTHES SET colors = :clothesColor WHERE id = :clothesId")
-    public Single<Integer> update(long clothesId, ClothesColor clothesColor);
+    public Single<Integer> updateColor(long clothesId, ClothesColor clothesColor);
+
+    @Query("UPDATE CLOTHES " +
+            "SET washing_type = :washingType, washing_power = :washingPower, temperature = :temperature, detergent = :detergent " +
+            "WHERE id = :clothesId")
+    public Single<Integer> updateWashingMethod(long clothesId, WashingType washingType, WashingPower washingPower, Temperature temperature, Detergent detergent);
+
+    @Query("UPDATE CLOTHES " +
+            "SET bleach = :bleach " +
+            "WHERE id = :clothesId")
+    public Single<Integer> updateBleach(long clothesId, Bleach bleach);
+
+    @Query("UPDATE CLOTHES " +
+            "SET iron = :iron " +
+            "WHERE id = :clothesId")
+    public Single<Integer> updateIron(long clothesId, Iron iron);
+
+    @Query("UPDATE CLOTHES " +
+            "SET dry_clean = :dryClean " +
+            "WHERE id = :clothesId")
+    public Single<Integer> updateDryClean(long clothesId, DryClean dryClean);
+
+    @Query("UPDATE CLOTHES " +
+            "SET dry = :dry " +
+            "WHERE id = :clothesId")
+    public Single<Integer> updateDry(long clothesId, Dry dry);
+
+    @Query("UPDATE CLOTHES " +
+            "SET weave = :weave " +
+            "WHERE id = :clothesId")
+    public Single<Integer> updateWeave(long clothesId, Weave weave);
 
     @Query("DELETE FROM CLOTHES WHERE id = :clothesId")
     public Single<Integer> delete(long clothesId);

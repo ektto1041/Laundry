@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="170dp">
+
+    <LinearLayout
+        android:id="@+id/first_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dialog_margin" >
+
+        <ImageButton
+            android:id="@+id/chlorine_button"
+            android:layout_width="@dimen/dialog_washing_method_item_size"
+            android:layout_height="@dimen/dialog_washing_method_item_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#00000000"
+            android:src="@drawable/ic_bleach_chlorine"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/not_chlorine_button"
+            android:layout_width="@dimen/dialog_washing_method_item_size"
+            android:layout_height="@dimen/dialog_washing_method_item_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#00000000"
+            android:src="@drawable/ic_bleach_not_chlorine"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/oxygen_button"
+            android:layout_width="@dimen/dialog_washing_method_item_size"
+            android:layout_height="@dimen/dialog_washing_method_item_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#00000000"
+            android:src="@drawable/ic_bleach_oxygen"
+            android:scaleType="centerInside" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/first_line"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/dialog_margin" >
+
+        <ImageButton
+            android:id="@+id/not_oxygen_button"
+            android:layout_width="@dimen/dialog_washing_method_item_size"
+            android:layout_height="@dimen/dialog_washing_method_item_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#00000000"
+            android:src="@drawable/ic_bleach_not_oxygen"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/all_button"
+            android:layout_width="@dimen/dialog_washing_method_item_size"
+            android:layout_height="@dimen/dialog_washing_method_item_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#00000000"
+            android:src="@drawable/ic_bleach_all"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/not_all_button"
+            android:layout_width="@dimen/dialog_washing_method_item_size"
+            android:layout_height="@dimen/dialog_washing_method_item_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#00000000"
+            android:src="@drawable/ic_bleach_not_all"
+            android:scaleType="centerInside" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
