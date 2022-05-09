@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 옷 추가 버튼 onClick
         addButton.setOnClickListener(v -> {
-            AppData.getDb().clothesDao().insert(new Clothes(null, null, null, null, ClothesColor.BLACK, null))
+            AppData.getDb().clothesDao().insert(new Clothes(null, null, null, null, ClothesColor.BLACK, null, null, null, null, null, null))
                     .doOnSuccess(id -> {
                         Intent intent = new Intent(this, DetailActivity.class);
                         intent.putExtra("clothesId", id);

@@ -6,4 +6,6 @@
     <dimen name="bottom_nav_height">75dp</dimen>
     <dimen name="bottom_nav_selected_button_padding">10dp</dimen>
     <dimen name="bottom_nav_button_padding">20dp</dimen>
+    <dimen name="dialog_margin">10dp</dimen>
+    <dimen name="dialog_washing_method_item_size">70dp</dimen>
 </resources>

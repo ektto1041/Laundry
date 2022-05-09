@@ -2,14 +2,21 @@ package com.mobileteam.laundry;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Debug;
+import android.util.Log;
 
 import androidx.room.TypeConverter;
 
+import com.mobileteam.laundry.enums.Bleach;
 import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
+import com.mobileteam.laundry.enums.Dry;
+import com.mobileteam.laundry.enums.DryClean;
+import com.mobileteam.laundry.enums.Iron;
 import com.mobileteam.laundry.enums.Temperature;
 import com.mobileteam.laundry.enums.WashingPower;
 import com.mobileteam.laundry.enums.WashingType;
+import com.mobileteam.laundry.enums.Weave;
 
 import java.io.ByteArrayOutputStream;
 
@@ -89,5 +96,65 @@ public class Converters {
     @TypeConverter
     public ClothesColor toColor(String str) {
         return ClothesColor.valueOf(str);
+    }
+
+    // Bleach -> String
+    @TypeConverter
+    public String fromBleach(Bleach bleach) {
+        return bleach == null ? null : bleach.name();
+    }
+
+    // String -> Bleach
+    @TypeConverter
+    public Bleach toBleach(String str) {
+        return str == null ? null : Bleach.valueOf(str);
+    }
+
+    // Iron -> String
+    @TypeConverter
+    public String fromIron(Iron iron) {
+        return iron == null ? null : iron.name();
+    }
+
+    // String -> Iron
+    @TypeConverter
+    public Iron toIron(String str) {
+        return str == null ? null : Iron.valueOf(str);
+    }
+
+    // DryClean -> String
+    @TypeConverter
+    public String fromDryClean(DryClean dryClean) {
+        return dryClean == null ? null : dryClean.name();
+    }
+
+    // String -> DryClean
+    @TypeConverter
+    public DryClean toDryClean(String str) {
+        return str == null ? null : DryClean.valueOf(str);
+    }
+
+    // Dry -> String
+    @TypeConverter
+    public String fromDry(Dry dry) {
+        return dry == null ? null : dry.name();
+    }
+
+    // String -> Dry
+    @TypeConverter
+    public Dry toDry(String str) {
+        return str == null ? null : Dry.valueOf(str);
+    }
+
+    // Weave -> String
+    @TypeConverter
+    public String fromWeave(Weave weave) {
+        return weave == null ? null : weave.name();
+    }
+
+    // String -> Weave
+    @TypeConverter
+    public Weave toWeave(String str) {
+        return str == null ? null : Weave.valueOf(str);
     }
 }
