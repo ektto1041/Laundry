@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobileteam.laundry.adapter.ColorSearchAdapter;
 import com.mobileteam.laundry.adapter.TextureSearchAdapter;
+import com.mobileteam.laundry.domain.Clothes;
 import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
 import com.mobileteam.laundry.enums.Temperature;
@@ -28,12 +29,17 @@ import com.mobileteam.laundry.enums.WashingType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<String> textures = new ArrayList<>();
     ArrayList<ClothesColor> colors = new ArrayList<>();
+    private WashingType washingType = WashingType.WASHER;
+    private WashingPower washingPower = WashingPower.STRONG;
+    private Temperature temperature = Temperature._95;
+    private Detergent detergent = Detergent.ANY;
     TextureSearchAdapter textureAdapter;
     ColorSearchAdapter colorAdapter;
 
@@ -68,6 +74,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         how.setAdapter(how_adp);
         how.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                switch(pos) {
+                    case 0:
+                        washingType = WashingType.WASHER;
+                        break;
+                    case 1:
+                        washingType = WashingType.WATER;
+                        break;
+                    case 2:
+                        washingType = WashingType.NO_WATER;
+                }
             }
             public void onNothingSelected(AdapterView<?> arg0) {}
         });
@@ -80,33 +96,58 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         strength.setAdapter(strength_adp);
         strength.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
+                switch (pos) {
+                    case 0:
+                        washingPower = WashingPower.STRONG;
+                        break;
+                    case 1:
+                        washingPower = WashingPower.WEAK;
+                }
             }
             public void onNothingSelected(AdapterView<?> arg0) {}
         });
 
         //세제 종류의 드롭 다운
-        Spinner detergent = (Spinner) findViewById(R.id.lst_detergent);
+        Spinner detergentSpinner = (Spinner) findViewById(R.id.lst_detergent);
         ArrayAdapter<CharSequence> detergent_adp = ArrayAdapter.createFromResource(
                 this, R.array.detergent_list, R.layout.spinner_item);
         detergent_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        detergent.setAdapter(detergent_adp);
-        detergent.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        detergentSpinner.setAdapter(detergent_adp);
+        detergentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                switch (pos) {
+                    case 0:
+                        detergent = Detergent.ANY;
+                        break;
+                    case 1:
+                        detergent = Detergent.NEUTRAL;
+                }
             }
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
 
         //물 온도의 드롭 다운
-        Spinner temperature = (Spinner) findViewById(R.id.lst_temperature);
+        Spinner temperatureSpinner = (Spinner) findViewById(R.id.lst_temperature);
         ArrayAdapter<CharSequence> temperature_adp = ArrayAdapter.createFromResource(
                 this, R.array.temperature_list, R.layout.spinner_item);
         temperature_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        temperature.setAdapter(temperature_adp);
-        temperature.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        temperatureSpinner.setAdapter(temperature_adp);
+        temperatureSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
+                switch (pos) {
+                    case 0:
+                        temperature = Temperature._95;
+                        break;
+                    case 1:
+                        temperature = Temperature._60;
+                        break;
+                    case 2:
+                        temperature = Temperature._40;
+                        break;
+                    case 3:
+                        temperature = Temperature._30;
+                }
             }
             public void onNothingSelected(AdapterView<?> arg0) {}
         });
@@ -168,25 +209,70 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     //검색 버튼 명령어
     public void search(View v) {
-        //db 세팅
+        int colorsCount = colors.size();
+        int textureCount = textures.size();
+
+        Log.d("#####", "colors: " + colorsCount);
+        Log.d("#####", "texture: " + textureCount);
+
+        if(colorsCount == 0 && textureCount == 0) {
+            // 재질, 색상 조건이 설정되어 있지 않으면
+            AppData.getDb().clothesDao().findAll(
+                    washingType,
+                    washingPower,
+                    detergent,
+                    temperature
+            )
+                    .doOnSuccess(this::afterSearchQuery)
+                    .doOnError(e -> Log.e("#####", e.toString()))
+                    .subscribeOn(Schedulers.io()).subscribe();
+        } else if(colorsCount == 0) {
+            // 재질 조건만 설정되어 있으면
+            AppData.getDb().clothesDao().findAllWithTexture(
+                    washingType,
+                    washingPower,
+                    detergent,
+                    temperature,
+                    textures
+            )
+                    .doOnSuccess(this::afterSearchQuery)
+                    .doOnError(e -> Log.e("#####", e.toString()))
+                    .subscribeOn(Schedulers.io()).subscribe();
+        } else if(textureCount == 0) {
+            // 색상 조건만 설정되어 있으면
+            AppData.getDb().clothesDao().findAllWithColors(
+                    washingType,
+                    washingPower,
+                    detergent,
+                    temperature,
+                    colors
+            )
+                    .doOnSuccess(this::afterSearchQuery)
+                    .doOnError(e -> Log.e("#####", e.toString()))
+                    .subscribeOn(Schedulers.io()).subscribe();
+        } else {
+            // 재질, 색상 조건 모두 설정되어 있으면
+            AppData.getDb().clothesDao().findAllWithColorsTexture(
+                    washingType,
+                    washingPower,
+                    detergent,
+                    temperature,
+                    colors,
+                    textures
+            )
+                    .doOnSuccess(this::afterSearchQuery)
+                    .doOnError(e -> Log.e("#####", e.toString()))
+                    .subscribeOn(Schedulers.io()).subscribe();
+        }
+    }
+
+    private void afterSearchQuery(List<Clothes> list) {
         Intent intent = new Intent(this, ClosetActivity.class);
 
-        AppData.getDb().clothesDao().findAll(
-                WashingType.WASHER,
-                WashingPower.STRONG,
-                Detergent.ANY,
-                Temperature._40,
-                colors,
-                textures)
-                .doOnSuccess(list -> {
-                    Log.d("#####", "" + list.size());
-                    intent.putExtra("searched",(Serializable) list);
-                    setResult(RESULT_OK, intent);
-                    startActivity(intent);
-                })
-                .doOnError(e -> Log.e("#####", e.toString()))
-                .subscribeOn(Schedulers.io()).subscribe();
-
+        Log.d("#####", "" + list.size());
+        intent.putExtra("searched",(Serializable) list);
+        setResult(RESULT_OK, intent);
+        startActivity(intent);
     }
 
 }

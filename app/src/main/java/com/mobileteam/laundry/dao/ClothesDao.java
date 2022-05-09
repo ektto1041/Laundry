@@ -28,19 +28,59 @@ public interface ClothesDao {
     @Query("SELECT * FROM CLOTHES")
     public Single<List<Clothes>> getAll();
 
-    @Query("SELECT * FROM CLOTHES " +
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
             "INNER JOIN TEXTURES ON CLOTHES.id = TEXTURES.clothes_id " +
             "WHERE washing_type = :washingType AND washing_power = :washingPower" +
             " AND detergent = :detergent AND temperature = :temperature" +
             " AND colors IN (:clothesColorList)" +
             " AND TEXTURES.name IN (:textureList)")
-    public Single<List<Clothes>> findAll(
+    public Single<List<Clothes>> findAllWithColorsTexture(
             WashingType washingType,
             WashingPower washingPower,
             Detergent detergent,
             Temperature temperature,
             List<ClothesColor> clothesColorList,
             List<String> textureList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "WHERE washing_type = :washingType AND washing_power = :washingPower" +
+            " AND detergent = :detergent AND temperature = :temperature" +
+            " AND colors IN (:clothesColorList)")
+    public Single<List<Clothes>> findAllWithColors(
+            WashingType washingType,
+            WashingPower washingPower,
+            Detergent detergent,
+            Temperature temperature,
+            List<ClothesColor> clothesColorList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES, TEXTURES " +
+            "WHERE CLOTHES.id = TEXTURES.clothes_id" +
+            " AND washing_type = :washingType AND washing_power = :washingPower" +
+            " AND detergent = :detergent AND temperature = :temperature" +
+            " AND TEXTURES.name IN (:textureList)")
+    public Single<List<Clothes>> findAllWithTexture(
+            WashingType washingType,
+            WashingPower washingPower,
+            Detergent detergent,
+            Temperature temperature,
+            List<String> textureList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "INNER JOIN TEXTURES ON CLOTHES.id = TEXTURES.clothes_id " +
+            "WHERE washing_type = :washingType AND washing_power = :washingPower" +
+            " AND detergent = :detergent AND temperature = :temperature")
+    public Single<List<Clothes>> findAll(
+            WashingType washingType,
+            WashingPower washingPower,
+            Detergent detergent,
+            Temperature temperature
     );
 
     @Query("SELECT * FROM CLOTHES WHERE id = :clothesId")
