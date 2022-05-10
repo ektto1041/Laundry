@@ -1,12 +1,5 @@
 package com.mobileteam.laundry.domain;
 
-import android.graphics.Bitmap;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
 import com.mobileteam.laundry.Converters;
 import com.mobileteam.laundry.enums.Bleach;
 import com.mobileteam.laundry.enums.ClothesColor;
@@ -21,43 +14,20 @@ import com.mobileteam.laundry.enums.Weave;
 
 import java.io.Serializable;
 
-@Entity(tableName = "CLOTHES")
-public class Clothes {
-    @PrimaryKey(autoGenerate = true)
+public class SerializableClothes implements Serializable {
     private long id;
-
-    @ColumnInfo(name = "washing_type")
     private WashingType washingType;
-
-    @ColumnInfo(name = "washing_power")
     private WashingPower washingPower;
-
-    @ColumnInfo(name = "detergent")
     private Detergent detergent;
-
-    @ColumnInfo(name = "temperature")
     private Temperature temperature;
-
-    @ColumnInfo(name = "colors")
     private ClothesColor clothesColor;
-
-    @ColumnInfo(name = "bleach")
     private Bleach bleach;
-
-    @ColumnInfo(name = "iron")
     private Iron iron;
-
-    @ColumnInfo(name = "dry_clean")
     private DryClean dryClean;
-
-    @ColumnInfo(name = "weave")
     private Weave weave;
-
-    @ColumnInfo(name = "dry")
     private Dry dry;
-
-    @ColumnInfo(name = "image")
-    private Bitmap image;
+    //private Bitmap image;
+    private byte[] image;
 
     public long getId() {
         return id;
@@ -147,41 +117,27 @@ public class Clothes {
         this.dry = dry;
     }
 
-    public Bitmap getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
-    public Clothes(WashingType washingType, WashingPower washingPower, Detergent detergent, Temperature temperature, ClothesColor clothesColor, Bleach bleach, Iron iron, DryClean dryClean, Weave weave, Dry dry, Bitmap image) {
-        this.washingType = washingType;
-        this.washingPower = washingPower;
-        this.detergent = detergent;
-        this.temperature = temperature;
-        this.clothesColor = clothesColor;
-        this.bleach = bleach;
-        this.iron = iron;
-        this.dryClean = dryClean;
-        this.weave = weave;
-        this.dry = dry;
-        this.image = image;
-    }
+    public SerializableClothes(Clothes clothes) {
+        this.id = clothes.getId();
+        this.washingType = clothes.getWashingType();
+        this.washingPower = clothes.getWashingPower();
+        this.detergent = clothes.getDetergent();
+        this.temperature = clothes.getTemperature();
+        this.clothesColor = clothes.getClothesColor();
+        this.bleach = clothes.getBleach();
+        this.iron = clothes.getIron();
+        this.dryClean = clothes.getDryClean();
+        this.weave = clothes.getWeave();
+        this.dry = clothes.getDry();
 
-    public Clothes(SerializableClothes sc) {
-        this.id = sc.getId();
-        this.washingType = sc.getWashingType();
-        this.washingPower = sc.getWashingPower();
-        this.detergent = sc.getDetergent();
-        this.temperature = sc.getTemperature();
-        this.clothesColor = sc.getClothesColor();
-        this.bleach = sc.getBleach();
-        this.iron = sc.getIron();
-        this.dryClean = sc.getDryClean();
-        this.weave = sc.getWeave();
-        this.dry = sc.getDry();
-
-        this.image = new Converters().toBitmap(sc.getImage());
+        this.image = new Converters().toByteArray(clothes.getImage());
     }
 }

@@ -83,7 +83,9 @@ public class DetailActivity extends AppCompatActivity {
 
                     AppData.getDb().textureDao().findAll(clothesId)
                             .doOnSuccess(textureList -> {
-                                setClothes(clothes, textureList);
+                                runOnUiThread(() -> {
+                                    setClothes(clothes, textureList);
+                                });
                             })
                             .doOnError(e -> Log.d("#####", e.toString()))
                             .subscribeOn(Schedulers.io()).subscribe();
@@ -125,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
                     .doOnSuccess(id -> {
                         AppData.getDb().clothesDao().delete(data.getId())
                                 .doOnSuccess(id_ -> {
-                                    finish();
+                                    runOnUiThread(this::finish);
                                 })
                                 .doOnError(e -> Log.e("#####", e.toString()))
                                 .subscribeOn(Schedulers.io()).subscribe();
@@ -399,7 +401,7 @@ public class DetailActivity extends AppCompatActivity {
         colorButton.setColorFilter(color.getColor(this), PorterDuff.Mode.SRC_IN);
         AppData.getDb().clothesDao().updateColor(data.getId(), color)
                 .doOnSuccess(clothesId -> {
-                    colorDialog.dismiss();
+                    runOnUiThread(colorDialog::dismiss);
                 })
                 .doOnError(e -> Log.e("#####", e.toString()))
                 .subscribeOn(Schedulers.io()).subscribe();
@@ -414,7 +416,7 @@ public class DetailActivity extends AppCompatActivity {
 
         AppData.getDb().textureDao().insert(new Texture(data.getId(), texture))
                 .doOnSuccess(id -> {
-                    textureDialog.dismiss();
+                    runOnUiThread(textureDialog::dismiss);
                 })
                 .doOnError(e -> Log.e("#####", e.toString()))
                 .subscribeOn(Schedulers.io()).subscribe();

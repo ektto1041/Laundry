@@ -75,7 +75,6 @@ public interface ClothesDao {
 
     @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
             "FROM CLOTHES " +
-            "INNER JOIN TEXTURES ON CLOTHES.id = TEXTURES.clothes_id " +
             "WHERE washing_type = :washingType AND washing_power = :washingPower" +
             " AND detergent = :detergent AND temperature = :temperature")
     public Single<List<Clothes>> findAll(
