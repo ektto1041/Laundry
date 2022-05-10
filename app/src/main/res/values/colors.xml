@@ -19,4 +19,5 @@
     <color name="cyan">#00ffff</color>
     <color name="yellow">#ffff00</color>
     <color name="magenta">#ff00ff</color>
+    <color name="pastel_green">#77dd77</color>
 </resources>

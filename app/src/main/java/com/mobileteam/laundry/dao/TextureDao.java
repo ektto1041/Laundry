@@ -20,4 +20,7 @@ public interface TextureDao {
 
     @Query("DELETE FROM TEXTURES WHERE clothes_id = :clothesId")
     public Single<Integer> delete(long clothesId);
+
+    @Query("DELETE FROM TEXTURES WHERE name = :name AND clothes_id = :clothesId")
+    public Single<Integer> deleteByName(String name, long clothesId);
 }
