@@ -109,7 +109,7 @@ public class DetailActivity extends AppCompatActivity {
         //옷 재질을 표시해주는 리사이클러 뷰
         RecyclerView textureRecyclerView = findViewById(R.id.texture_recycler_view);
         textureRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        textureAdapter = new TextureSearchAdapter(this, textures);
+        textureAdapter = new TextureSearchAdapter(this, textures, -1);
         textureRecyclerView.setAdapter(textureAdapter);
     }
 
@@ -268,6 +268,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // 재질
         refreshTextures(textureList);
+        textureAdapter.setClothesId(clothes.getId());
 
         // 세탁 기호 - Washing Method
         Temperature temperature = clothes.getTemperature();

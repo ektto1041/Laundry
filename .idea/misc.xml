@@ -24,6 +24,7 @@
         <entry key="app/src/main/res/drawable/button_patten.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_menu_icon_svg.xml" value="0.231" />
+        <entry key="app/src/main/res/drawable/rounded_rectangle.xml" value="0.24" />
         <entry key="app/src/main/res/layout/acitivity_closet.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_closet.xml" value="0.19746376811594202" />
         <entry key="app/src/main/res/layout/activity_kind.xml" value="0.29891304347826086" />
@@ -40,7 +41,7 @@
         <entry key="app/src/main/res/layout/dialog_weave.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/layout/howto_item.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/layout/spinner_item.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/texture_item.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/texture_item.xml" value="0.7063757633817369" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.25" />
       </map>
     </option>

@@ -16,4 +16,11 @@
     <dimen name="search_button_width">70dp</dimen>
     <dimen name="search_button_height">45dp</dimen>
     <dimen name="search_recycler_view_margin_h">10dp</dimen>
+    <dimen name="texture_item_width">120dp</dimen>
+    <dimen name="texture_item_height">40dp</dimen>
+    <dimen name="texture_item_text_width">100dp</dimen>
+    <dimen name="texture_item_x_width">20dp</dimen>
+    <dimen name="texture_item_x_margin_end">10dp</dimen>
+    <dimen name="texture_item_container_width">140dp</dimen>
+    <dimen name="texture_item_container_height">60dp</dimen>
 </resources>

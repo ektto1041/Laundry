@@ -56,7 +56,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         RecyclerView textureview = findViewById(R.id.texture_recycler_view);
         int colums1 = 4;
         textureview.setLayoutManager(new GridLayoutManager(this, colums1));
-        textureAdapter = new TextureSearchAdapter(this, textures);
+        textureAdapter = new TextureSearchAdapter(this, textures, -1);
         textureview.setAdapter(textureAdapter);
 
         //옷 색상을 표시해주는 리사이클러 뷰

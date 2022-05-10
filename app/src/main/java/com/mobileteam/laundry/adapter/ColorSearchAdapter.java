@@ -24,10 +24,6 @@ public class ColorSearchAdapter extends RecyclerView.Adapter<ColorSearchAdapter.
         colData = data;
     }
 
-//    public void update(String[] list) {
-//        colData = list;
-//    } //리스트 항목을 업데이트
-
     public int getItemCount() {
         return colData.size();
     } //리스트 항목의 개수를 반환
