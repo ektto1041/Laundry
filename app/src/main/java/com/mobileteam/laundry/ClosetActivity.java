@@ -24,6 +24,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class ClosetActivity extends AppCompatActivity {
     private List<Clothes> data = new ArrayList<>();
 
+    private ClosetAdapter closetAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +35,24 @@ public class ClosetActivity extends AppCompatActivity {
         RecyclerView closetRecyclerView = (RecyclerView) findViewById(R.id.closet_recycler_view);
         int closetColumn = 3;
         closetRecyclerView.setLayoutManager(new GridLayoutManager(this, closetColumn));
-        final ClosetAdapter closetAdapter = new ClosetAdapter(this, data);
+        closetAdapter = new ClosetAdapter(this, data);
         closetRecyclerView.setAdapter(closetAdapter);
+
+        // header 색 변경
+        View header = findViewById(R.id.header);
+        header.setBackgroundColor(getColor(AppData.getModeColor()));
+
+        // header back button onClick
+        ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         // intent 에서 데이터 가져오는 과정
         List<Clothes> clothesList = getClothesList();
@@ -48,7 +66,7 @@ public class ClosetActivity extends AppCompatActivity {
                         data.clear();
                         data.addAll(list);
 
-                        closetAdapter.notifyDataSetChanged();
+                        runOnUiThread(closetAdapter::notifyDataSetChanged);
                     })
                     .doOnError(e -> Log.e("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
@@ -61,26 +79,6 @@ public class ClosetActivity extends AppCompatActivity {
 
             closetAdapter.notifyDataSetChanged();
         }
-
-        // header 색 변경
-        View header = findViewById(R.id.header);
-        header.setBackgroundColor(getColor(AppData.getModeColor()));
-
-        // header back button onClick
-        ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
-        backButton.setOnClickListener(v -> {
-            finish();
-        });
-
-        // 임시 옷 데이터
-//        ArrayList<Cloth> data = new ArrayList<>();
-//        data.add(new Cloth(R.drawable.add_circle_icon));
-//        data.add(new Cloth(R.drawable.search_icon));
-//        data.add(new Cloth(R.drawable.menu_icon));
-//        data.add(new Cloth(R.drawable.search_icon));
-//        data.add(new Cloth(R.drawable.search_icon));
-
-
     }
 
     private List<Clothes> getClothesList() {
