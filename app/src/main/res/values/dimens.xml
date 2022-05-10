@@ -8,4 +8,12 @@
     <dimen name="bottom_nav_button_padding">20dp</dimen>
     <dimen name="dialog_margin">10dp</dimen>
     <dimen name="dialog_washing_method_item_size">70dp</dimen>
+    <dimen name="search_condition_text_view_font_size">35sp</dimen>
+    <dimen name="search_spinner_width">120dp</dimen>
+    <dimen name="search_condition_item_height">30dp</dimen>
+    <dimen name="search_condition_item_text_width">65dp</dimen>
+    <dimen name="search_condition_item_text_font_size">15sp</dimen>
+    <dimen name="search_button_width">70dp</dimen>
+    <dimen name="search_button_height">45dp</dimen>
+    <dimen name="search_recycler_view_margin_h">10dp</dimen>
 </resources>
