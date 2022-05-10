@@ -1,5 +1,7 @@
 package com.mobileteam.laundry.dao;
 
+import android.graphics.Bitmap;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -85,6 +87,9 @@ public interface ClothesDao {
 
     @Query("SELECT * FROM CLOTHES WHERE id = :clothesId")
     public Single<Clothes> fineOne(long clothesId);
+
+    @Query("UPDATE CLOTHES SET image = :image WHERE id = :clothesId")
+    public Single<Integer> updateImage(long clothesId, Bitmap image);
 
     @Query("UPDATE CLOTHES SET colors = :clothesColor WHERE id = :clothesId")
     public Single<Integer> updateColor(long clothesId, ClothesColor clothesColor);

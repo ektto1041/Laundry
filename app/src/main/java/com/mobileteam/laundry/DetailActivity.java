@@ -2,6 +2,8 @@ package com.mobileteam.laundry;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import com.mobileteam.laundry.enums.WashingPower;
 import com.mobileteam.laundry.enums.WashingType;
 import com.mobileteam.laundry.enums.Weave;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -250,6 +253,12 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setClothes(Clothes clothes, List<Texture> textureList) {
+        // 옷 이미지
+        Bitmap image = clothes.getImage();
+        if(image != null) {
+            imageView.setImageBitmap(image);
+        }
+
         // 색상
         ClothesColor clothesColor = clothes.getClothesColor();
         if(clothesColor != null) {
@@ -319,14 +328,28 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent dataIntent) {
+        super.onActivityResult(requestCode, resultCode, dataIntent);
 
         if(requestCode == 99 && resultCode == RESULT_OK) {
             try {
-                Uri uri = data.getData();
+                Uri uri = dataIntent.getData();
 
                 Glide.with(getApplicationContext()).load(uri).into(imageView);
+
+                Bitmap bitmap = null;
+                try {
+                    bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(getContentResolver(), uri));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if(bitmap == null) return;
+                AppData.getDb().clothesDao().updateImage(data.getId(), bitmap)
+                        .doOnSuccess(id -> {})
+                        .doOnError(e -> Log.e("#####", e.toString()))
+                        .subscribeOn(Schedulers.io()).subscribe();
+
             } catch(Exception e) {
                 e.printStackTrace();
             }

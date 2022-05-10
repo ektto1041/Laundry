@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,18 +49,18 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        View banner = findViewById(R.id.banner);
-        banner.setBackgroundColor(getColor(AppData.getModeColor()));
+        View header = findViewById(R.id.header);
+        header.setBackgroundColor(getColor(AppData.getModeColor()));
 
         //옷 재질을 표시해주는 리사이클러 뷰
-        RecyclerView textureview = findViewById(R.id.textureview);
+        RecyclerView textureview = findViewById(R.id.texture_recycler_view);
         int colums1 = 4;
         textureview.setLayoutManager(new GridLayoutManager(this, colums1));
         textureAdapter = new TextureSearchAdapter(this, textures);
         textureview.setAdapter(textureAdapter);
 
         //옷 색상을 표시해주는 리사이클러 뷰
-        RecyclerView colorview = findViewById(R.id.colorview);
+        RecyclerView colorview = findViewById(R.id.color_recycler_view);
         int colums2 = 9;
         colorview.setLayoutManager(new GridLayoutManager(this, colums2));
         colorAdapter = new ColorSearchAdapter(this, colors);
@@ -67,7 +68,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
 
         //세탁 방법의 드롭 다운
-        Spinner how = (Spinner) findViewById(R.id.lst_how);
+        Spinner how = (Spinner) findViewById(R.id.washing_type_spinner);
         ArrayAdapter<CharSequence> how_adp = ArrayAdapter.createFromResource(
                 this, R.array.how_list, R.layout.spinner_item);
         how_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -89,7 +90,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         //세탁 강도의 드롭 다운
-        Spinner strength = (Spinner) findViewById(R.id.lst_strength);
+        Spinner strength = (Spinner) findViewById(R.id.washing_power_spinner);
         ArrayAdapter<CharSequence> strength_adp = ArrayAdapter.createFromResource(
                 this, R.array.strength_list, R.layout.spinner_item);
         strength_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -108,7 +109,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         //세제 종류의 드롭 다운
-        Spinner detergentSpinner = (Spinner) findViewById(R.id.lst_detergent);
+        Spinner detergentSpinner = (Spinner) findViewById(R.id.detergent_spinner);
         ArrayAdapter<CharSequence> detergent_adp = ArrayAdapter.createFromResource(
                 this, R.array.detergent_list, R.layout.spinner_item);
         detergent_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -128,7 +129,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
 
         //물 온도의 드롭 다운
-        Spinner temperatureSpinner = (Spinner) findViewById(R.id.lst_temperature);
+        Spinner temperatureSpinner = (Spinner) findViewById(R.id.temperature_spinner);
         ArrayAdapter<CharSequence> temperature_adp = ArrayAdapter.createFromResource(
                 this, R.array.temperature_list, R.layout.spinner_item);
         temperature_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,8 +154,14 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
 
 
-        Button btn_search = findViewById(R.id.btn_search);
+        Button btn_search = findViewById(R.id.search_button);
         btn_search.setBackgroundColor(getColor(AppData.getModeColor()));
+
+        // header back button onClick
+        ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     //옷 색상추가 대화상자 열기
