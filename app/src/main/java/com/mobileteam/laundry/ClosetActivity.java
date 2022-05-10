@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobileteam.laundry.adapter.ClosetAdapter;
 import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.domain.SerializableClothes;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -82,6 +84,9 @@ public class ClosetActivity extends AppCompatActivity {
     }
 
     private List<Clothes> getClothesList() {
-        return (List<Clothes>) getIntent().getSerializableExtra("searched");
+        List<SerializableClothes> serializableClothesList = (List<SerializableClothes>) getIntent().getSerializableExtra("searched");
+        if(serializableClothesList == null) return null;
+
+        return serializableClothesList.stream().map(Clothes::new).collect(Collectors.toList());
     }
 }

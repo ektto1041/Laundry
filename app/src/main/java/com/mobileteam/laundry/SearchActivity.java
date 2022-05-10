@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mobileteam.laundry.adapter.ColorSearchAdapter;
 import com.mobileteam.laundry.adapter.TextureSearchAdapter;
 import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.domain.SerializableClothes;
 import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
 import com.mobileteam.laundry.enums.Temperature;
@@ -31,6 +32,7 @@ import com.mobileteam.laundry.enums.WashingType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -219,6 +221,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         int colorsCount = colors.size();
         int textureCount = textures.size();
 
+        Log.d("#####", "washingType: " + washingType);
+        Log.d("#####", "washingPower: " + washingPower);
+        Log.d("#####", "detergent: " + detergent);
+        Log.d("#####", "temperature: " + temperature);
         Log.d("#####", "colors: " + colorsCount);
         Log.d("#####", "texture: " + textureCount);
 
@@ -274,12 +280,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void afterSearchQuery(List<Clothes> list) {
-        Intent intent = new Intent(this, ClosetActivity.class);
+        final List<SerializableClothes> serializableClothesList = list.stream().map(SerializableClothes::new).collect(Collectors.toList());
 
-        Log.d("#####", "" + list.size());
-        intent.putExtra("searched",(Serializable) list);
-        setResult(RESULT_OK, intent);
-        startActivity(intent);
+        runOnUiThread(() -> {
+            Intent intent = new Intent(this, ClosetActivity.class);
+
+            Log.d("#####", "" + serializableClothesList.size());
+            intent.putExtra("searched",(Serializable) serializableClothesList);
+            setResult(RESULT_OK, intent);
+            startActivity(intent);
+        });
     }
 
 }

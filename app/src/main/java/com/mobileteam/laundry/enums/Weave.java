@@ -13,16 +13,16 @@ public enum Weave {
 
         switch (this) {
             case MC:
-                result = R.drawable.ic_dry_hook;
+                result = R.drawable.ic_wv_mc;
                 break;
             case MC_NOT:
-                result = R.drawable.ic_dry_hook_under;
+                result = R.drawable.ic_wv_mc_not;
                 break;
             case HD:
-                result = R.drawable.ic_dry_lie;
+                result = R.drawable.ic_wv_hd;
                 break;
             case HD_NOT:
-                result = R.drawable.ic_dry_lie_under;
+                result = R.drawable.ic_wv_hd_not;
                 break;
         }
 

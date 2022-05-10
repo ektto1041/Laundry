@@ -118,10 +118,12 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(v -> {
             AppData.getDb().clothesDao().insert(new Clothes(null, null, null, null, ClothesColor.BLACK, null, null, null, null, null, null))
                     .doOnSuccess(id -> {
-                        Intent intent = new Intent(this, DetailActivity.class);
-                        intent.putExtra("clothesId", id);
-                        setResult(RESULT_OK, intent);
-                        startActivity(intent);
+                        runOnUiThread(() -> {
+                            Intent intent = new Intent(this, DetailActivity.class);
+                            intent.putExtra("clothesId", id);
+                            setResult(RESULT_OK, intent);
+                            startActivity(intent);
+                        });
                     })
                     .doOnError(e -> Log.d("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
