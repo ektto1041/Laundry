@@ -17,6 +17,22 @@
         <item>상관없음</item>
         <item>중성세제</item>
     </string-array>
+    
+    <string-array name="ironable_list">
+        <item>가능함</item>
+        <item>불가능함</item>
+    </string-array>
+
+    <string-array name="irontmp_list">
+        <item>180~210ºC</item>
+        <item>140~160ºC</item>
+        <item>80~120ºC</item>
+    </string-array>
+
+    <string-array name="cover_list">
+        <item>필요없음</item>
+        <item>덮개필수</item>
+    </string-array>
 
     <string-array name="temperature_list">
         <item>95ºC</item>

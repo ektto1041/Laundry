@@ -1,5 +1,8 @@
 package com.mobileteam.laundry;
-public class Cloth {
+
+import java.io.Serializable;
+
+public class Cloth implements Serializable {
 
     private int src;
 
