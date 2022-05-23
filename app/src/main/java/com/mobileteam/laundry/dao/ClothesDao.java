@@ -84,6 +84,45 @@ public interface ClothesDao {
             Temperature temperature
     );
 
+    //iron 관련(임시)
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "INNER JOIN TEXTURES ON CLOTHES.id = TEXTURES.clothes_id " +
+            "WHERE iron = :iron" +
+            " AND colors IN (:clothesColorList)" +
+            " AND TEXTURES.name IN (:textureList)")
+    public Single<List<Clothes>> findIronWithColorsTexture(
+            Iron iron,
+            List<ClothesColor> clothesColorList,
+            List<String> textureList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "WHERE iron = :iron" +
+            " AND colors IN (:clothesColorList)")
+    public Single<List<Clothes>> findIronWithColors(
+            Iron iron,
+            List<ClothesColor> clothesColorList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES, TEXTURES " +
+            "WHERE CLOTHES.id = TEXTURES.clothes_id" +
+            " AND iron = :iron" +
+            " AND TEXTURES.name IN (:textureList)")
+    public Single<List<Clothes>> findIronWithTexture(
+            Iron iron,
+            List<String> textureList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "WHERE iron = :iron")
+    public Single<List<Clothes>> findIron(
+            Iron iron
+    );
+
     @Query("SELECT * FROM CLOTHES WHERE id = :clothesId")
     public Single<Clothes> fineOne(long clothesId);
 

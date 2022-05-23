@@ -125,13 +125,14 @@
 
             <TextView
                 android:id="@+id/condition_text_view"
-                android:layout_width="158dp"
+                android:layout_width="wrap_content"
                 android:layout_height="45dp"
+                android:layout_marginStart="16dp"
                 android:text="세탁 조건"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="@dimen/search_condition_text_view_font_size"
                 android:textStyle="bold"
-                android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,71 +148,77 @@
 
                 <TextView
                     android:id="@+id/washing_type_text_view"
-                    android:layout_width="@dimen/search_condition_item_text_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
-                    android:text="세탁 방법"
-                    android:textSize="@dimen/search_condition_item_text_font_size"
                     android:gravity="center"
+                    android:text="세탁 방법:"
+                    android:textSize="@dimen/search_condition_item_text_font_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
                     android:id="@+id/washing_type_spinner"
-                    android:layout_width="@dimen/search_spinner_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
                     app:layout_constraintStart_toEndOf="@+id/washing_type_text_view"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/washing_power_text_view"
-                    android:layout_width="@dimen/search_condition_item_text_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
+                    android:layout_marginStart="204dp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="세탁 강도"
+                    android:text="세탁 강도:"
                     android:textSize="@dimen/search_condition_item_text_font_size"
-                    app:layout_constraintEnd_toStartOf="@id/washing_power_spinner"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <Spinner
                     android:id="@+id/washing_power_spinner"
-                    android:layout_width="@dimen/search_spinner_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/washing_power_text_view"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/detergent_text_view"
-                    android:layout_width="@dimen/search_condition_item_text_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
                     android:gravity="center"
-                    android:text="세제 종류"
+                    android:text="세제 종류:"
                     android:textSize="@dimen/search_condition_item_text_font_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <Spinner
                     android:id="@+id/detergent_spinner"
-                    android:layout_width="@dimen/search_spinner_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/detergent_text_view" />
 
                 <TextView
                     android:id="@+id/temperature_text_view"
-                    android:layout_width="@dimen/search_condition_item_text_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
+                    android:layout_marginStart="204dp"
                     android:gravity="center"
-                    android:text="물 온도"
+                    android:text="물 온도:"
                     android:textSize="@dimen/search_condition_item_text_font_size"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/temperature_spinner" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/washing_power_text_view"
+                    app:layout_constraintVertical_bias="0.991" />
 
                 <Spinner
                     android:id="@+id/temperature_spinner"
-                    android:layout_width="@dimen/search_spinner_width"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/search_condition_item_height"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintStart_toEndOf="@+id/temperature_text_view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

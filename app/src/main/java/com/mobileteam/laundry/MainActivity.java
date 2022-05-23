@@ -131,8 +131,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearchClicked() {
-        Intent intent = new Intent(this, SearchActivity.class);
-//        Intent intent = new Intent(this, DetailActivity.class); /*임시로 만든 접속 경로*/
+        Intent intent = null;
+        if(getColor(AppData.getModeColor()) == getColor(R.color.aespa_red)) {
+            intent = new Intent(this, SearchActivity.class);
+        } else if(getColor(AppData.getModeColor()) == getColor(R.color.aespa_yellow)) {
+            intent = new Intent(this, IronActivity.class);
+        } else {
+
+        }
         startActivity(intent);
     }
 

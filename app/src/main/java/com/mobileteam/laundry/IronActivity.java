@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +26,7 @@ import com.mobileteam.laundry.domain.Clothes;
 import com.mobileteam.laundry.domain.SerializableClothes;
 import com.mobileteam.laundry.enums.ClothesColor;
 import com.mobileteam.laundry.enums.Detergent;
+import com.mobileteam.laundry.enums.Iron;
 import com.mobileteam.laundry.enums.Temperature;
 import com.mobileteam.laundry.enums.WashingPower;
 import com.mobileteam.laundry.enums.WashingType;
@@ -36,15 +38,14 @@ import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
+public class IronActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<String> textures = new ArrayList<>();
     ArrayList<ClothesColor> colors = new ArrayList<>();
-    private WashingType washingType = WashingType.WASHER;
-    private WashingPower washingPower = WashingPower.STRONG;
-    private Temperature temperature = Temperature._95;
-    private Detergent detergent = Detergent.ANY;
+    private Iron iron = Iron.HT;
     TextureSearchAdapter textureAdapter;
     ColorSearchAdapter colorAdapter;
+    private int tmp_chk = 0;
+    private int cover_chk = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,88 +69,83 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         colorAdapter = new ColorSearchAdapter(this, colors);
         colorview.setAdapter(colorAdapter);
 
+        TextView subtitle = (TextView) findViewById(R.id.condition_text_view);
+        subtitle.setText("다림질 조건");
 
-        //세탁 방법의 드롭 다운
-        Spinner how = (Spinner) findViewById(R.id.washing_type_spinner);
-        ArrayAdapter<CharSequence> how_adp = ArrayAdapter.createFromResource(
-                this, R.array.how_list, R.layout.spinner_item);
-        how_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        how.setAdapter(how_adp);
-        how.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                switch(pos) {
-                    case 0:
-                        washingType = WashingType.WASHER;
-                        break;
-                    case 1:
-                        washingType = WashingType.WATER;
-                        break;
-                    case 2:
-                        washingType = WashingType.NO_WATER;
-                }
-            }
-            public void onNothingSelected(AdapterView<?> arg0) {}
-        });
+        //다림질 방법과 관련된 드롭 다운은 기존의 것을 수정해 사용함
+        //사용하지 않는 드롭 다운
+        TextView nonTxt = (TextView) findViewById(R.id.washing_power_text_view);
+        nonTxt.setVisibility(View.INVISIBLE);
+        Spinner nonSpin = (Spinner) findViewById(R.id.washing_power_spinner);
+        nonSpin.setVisibility(View.INVISIBLE);
 
-        //세탁 강도의 드롭 다운
-        Spinner strength = (Spinner) findViewById(R.id.washing_power_spinner);
-        ArrayAdapter<CharSequence> strength_adp = ArrayAdapter.createFromResource(
-                this, R.array.strength_list, R.layout.spinner_item);
-        strength_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        strength.setAdapter(strength_adp);
-        strength.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                switch (pos) {
-                    case 0:
-                        washingPower = WashingPower.STRONG;
-                        break;
-                    case 1:
-                        washingPower = WashingPower.WEAK;
-                }
-            }
-            public void onNothingSelected(AdapterView<?> arg0) {}
-        });
-
-        //세제 종류의 드롭 다운
-        Spinner detergentSpinner = (Spinner) findViewById(R.id.detergent_spinner);
-        ArrayAdapter<CharSequence> detergent_adp = ArrayAdapter.createFromResource(
-                this, R.array.detergent_list, R.layout.spinner_item);
-        detergent_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        detergentSpinner.setAdapter(detergent_adp);
-        detergentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                switch (pos) {
-                    case 0:
-                        detergent = Detergent.ANY;
-                        break;
-                    case 1:
-                        detergent = Detergent.NEUTRAL;
-                }
-            }
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
-        //물 온도의 드롭 다운
-        Spinner temperatureSpinner = (Spinner) findViewById(R.id.temperature_spinner);
+        //다림질 온도의 드롭 다운
+        TextView tmpTxt = (TextView) findViewById(R.id.detergent_text_view);
+        tmpTxt.setText("다림질 온도:");
+        Spinner temperatureSpinner = (Spinner) findViewById(R.id.detergent_spinner);
         ArrayAdapter<CharSequence> temperature_adp = ArrayAdapter.createFromResource(
-                this, R.array.temperature_list, R.layout.spinner_item);
+                this, R.array.irontmp_list, R.layout.spinner_item);
         temperature_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         temperatureSpinner.setAdapter(temperature_adp);
         temperatureSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 switch (pos) {
                     case 0:
-                        temperature = Temperature._95;
+                        tmp_chk = 0;
                         break;
                     case 1:
-                        temperature = Temperature._60;
+                        tmp_chk = 1;
                         break;
                     case 2:
-                        temperature = Temperature._40;
+                        tmp_chk = 2;
+                }
+            }
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        //천 덮개 여부의 드롭 다운
+        TextView covTxt = (TextView) findViewById(R.id.temperature_text_view);
+        covTxt.setText("천 덮개:");
+        Spinner coverSpinner = (Spinner) findViewById(R.id.temperature_spinner);
+        ArrayAdapter<CharSequence> cover_adp = ArrayAdapter.createFromResource(
+                this, R.array.cover_list, R.layout.spinner_item);
+        cover_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        coverSpinner.setAdapter(cover_adp);
+        coverSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                switch (pos) {
+                    case 0:
+                        cover_chk = 0;
                         break;
-                    case 3:
-                        temperature = Temperature._30;
+                    case 1:
+                        cover_chk = 1;
+                }
+            }
+            public void onNothingSelected(AdapterView<?> arg0) {}
+        });
+
+        //다리미 가능여부의 드롭 다운
+        TextView ableTxt = (TextView) findViewById(R.id.washing_type_text_view);
+        ableTxt.setText("가능 여부:");
+        Spinner ableSpinner = (Spinner) findViewById(R.id.washing_type_spinner);
+        ArrayAdapter<CharSequence> able_adp = ArrayAdapter.createFromResource(
+                this, R.array.ironable_list, R.layout.spinner_item);
+        able_adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ableSpinner.setAdapter(able_adp);
+        ableSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                switch(pos) {
+                    case 0:
+                        temperatureSpinner.setEnabled(true);
+                        coverSpinner.setEnabled(true);
+                        break;
+                    case 1:
+                        iron = Iron.NOT;
+                        //다른 스피너 사용 불가
+                        temperatureSpinner.setEnabled(false);
+                        coverSpinner.setEnabled(false);
+                        break;
                 }
             }
             public void onNothingSelected(AdapterView<?> arg0) {}
@@ -207,10 +203,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         searchtexture.findViewById(R.id.btn_texture).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(input.getText().toString().length() != 0) {
-                    textures.add(input.getText().toString().trim());
-                    textureAdapter.notifyDataSetChanged();
-                }
+                textures.add(input.getText().toString().trim());
+                textureAdapter.notifyDataSetChanged();
                 searchtexture.dismiss();
             }
         });
@@ -218,63 +212,59 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchtexture.show();
     }
 
+    public void determine(int tmp, int cover) {
+        if(tmp == 0) {
+            if(cover == 0) {
+                iron = Iron.HT;
+            } else {
+                iron = Iron.HT_WITH;
+            }
+        } else if(tmp == 1) {
+            if (cover ==0) {
+                iron = Iron.MT;
+            } else {
+                iron = Iron.MT_WITH;
+            }
+        } else {
+            if (cover == 0) {
+                iron = Iron.LT;
+            } else {
+                iron = Iron.LT_WITH;
+            }
+        }
+    }
+
     //검색 버튼 명령어
     public void search(View v) {
         int colorsCount = colors.size();
         int textureCount = textures.size();
+        determine(tmp_chk, cover_chk);
 
-        Log.d("#####", "washingType: " + washingType);
-        Log.d("#####", "washingPower: " + washingPower);
-        Log.d("#####", "detergent: " + detergent);
-        Log.d("#####", "temperature: " + temperature);
+        Log.d("#####", "iron: " + iron);
         Log.d("#####", "colors: " + colorsCount);
         Log.d("#####", "texture: " + textureCount);
 
         if(colorsCount == 0 && textureCount == 0) {
             // 재질, 색상 조건이 설정되어 있지 않으면
-            AppData.getDb().clothesDao().findAll(
-                    washingType,
-                    washingPower,
-                    detergent,
-                    temperature
-            )
+            AppData.getDb().clothesDao().findIron(iron)
                     .doOnSuccess(this::afterSearchQuery)
                     .doOnError(e -> Log.e("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
         } else if(colorsCount == 0) {
             // 재질 조건만 설정되어 있으면
-            AppData.getDb().clothesDao().findAllWithTexture(
-                    washingType,
-                    washingPower,
-                    detergent,
-                    temperature,
-                    textures
-            )
+            AppData.getDb().clothesDao().findIronWithTexture(iron, textures)
                     .doOnSuccess(this::afterSearchQuery)
                     .doOnError(e -> Log.e("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
         } else if(textureCount == 0) {
             // 색상 조건만 설정되어 있으면
-            AppData.getDb().clothesDao().findAllWithColors(
-                    washingType,
-                    washingPower,
-                    detergent,
-                    temperature,
-                    colors
-            )
+            AppData.getDb().clothesDao().findIronWithColors(iron, colors)
                     .doOnSuccess(this::afterSearchQuery)
                     .doOnError(e -> Log.e("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
         } else {
             // 재질, 색상 조건 모두 설정되어 있으면
-            AppData.getDb().clothesDao().findAllWithColorsTexture(
-                    washingType,
-                    washingPower,
-                    detergent,
-                    temperature,
-                    colors,
-                    textures
-            )
+            AppData.getDb().clothesDao().findIronWithColorsTexture(iron, colors, textures)
                     .doOnSuccess(this::afterSearchQuery)
                     .doOnError(e -> Log.e("#####", e.toString()))
                     .subscribeOn(Schedulers.io()).subscribe();
@@ -293,5 +283,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         });
     }
+
+
 
 }
