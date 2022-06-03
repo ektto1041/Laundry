@@ -22,6 +22,9 @@
             android:name=".IronActivity"
             android:exported="false" />
         <activity
+            android:name=".DryActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity

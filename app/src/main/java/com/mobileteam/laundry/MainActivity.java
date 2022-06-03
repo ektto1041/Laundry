@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         } else if(getColor(AppData.getModeColor()) == getColor(R.color.aespa_yellow)) {
             intent = new Intent(this, IronActivity.class);
         } else {
-
+            intent = new Intent(this, DryActivity.class);
         }
         startActivity(intent);
     }
