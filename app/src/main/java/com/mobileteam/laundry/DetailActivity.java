@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mobileteam.laundry.adapter.TextureSearchAdapter;
 import com.mobileteam.laundry.domain.Clothes;
+import com.mobileteam.laundry.domain.SerializableClothes;
 import com.mobileteam.laundry.domain.Texture;
 import com.mobileteam.laundry.enums.Bleach;
 import com.mobileteam.laundry.enums.ClothesColor;
@@ -34,6 +35,7 @@ import com.mobileteam.laundry.enums.WashingType;
 import com.mobileteam.laundry.enums.Weave;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -119,6 +121,20 @@ public class DetailActivity extends AppCompatActivity {
         // 뒤로가기 버튼
         ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
+
+        // 동시 세탁 버튼
+        ImageButton laundryWithButton = (ImageButton) findViewById(R.id.laundry_with_button);
+        laundryWithButton.setOnClickListener(v -> {
+            AppData.getDb().clothesDao().findAll(
+                    data.getWashingType(),
+                    data.getWashingPower(),
+                    data.getDetergent(),
+                    data.getTemperature()
+            )
+                    .doOnSuccess(this::afterSearchQuery)
+                    .doOnError(e -> Log.e("#####", e.toString()))
+                    .subscribeOn(Schedulers.io()).subscribe();
+        });
 
         // 삭제 버튼
         ImageButton deleteButton = (ImageButton) findViewById(R.id.delete_button);
@@ -679,5 +695,18 @@ public class DetailActivity extends AppCompatActivity {
                 .doOnSuccess(id -> { Log.d("#####", "update finish"); })
                 .doOnError(e -> Log.e("#####", e.toString()))
                 .subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    private void afterSearchQuery(List<Clothes> list) {
+        final List<SerializableClothes> serializableClothesList = list.stream().map(SerializableClothes::new).collect(Collectors.toList());
+
+        runOnUiThread(() -> {
+            Intent intent = new Intent(this, ClosetActivity.class);
+
+            Log.d("#####", "" + serializableClothesList.size());
+            intent.putExtra("searched",(Serializable) serializableClothesList);
+            setResult(RESULT_OK, intent);
+            startActivity(intent);
+        });
     }
 }
