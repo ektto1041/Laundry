@@ -115,61 +115,67 @@
                 android:id="@+id/washing_method_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:src="@drawable/ic_tp_40_weak"
-                android:scaleType="centerInside" />
+                android:padding="5dp"
+                android:paddingVertical="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_tp_40_weak" />
 
             <ImageButton
                 android:id="@+id/bleach_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:src="@drawable/ic_bleach_chlorine"
-                android:scaleType="centerInside" />
+                android:padding="5dp"
+                android:paddingVertical="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bleach_chlorine" />
 
             <ImageButton
                 android:id="@+id/iron_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:src="@drawable/ic_iron"
-                android:scaleType="centerInside" />
+                android:padding="5dp"
+                android:paddingVertical="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_iron" />
 
             <ImageButton
                 android:id="@+id/dry_clean_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:src="@drawable/ic_laundry"
-                android:scaleType="centerInside" />
+                android:padding="5dp"
+                android:paddingVertical="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_laundry" />
 
             <ImageButton
                 android:id="@+id/weave_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:src="@drawable/ic_picture"
-                android:scaleType="centerInside" />
+                android:padding="5dp"
+                android:paddingVertical="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_picture" />
 
             <ImageButton
                 android:id="@+id/dry_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="#00000000"
-                android:src="@drawable/ic_dry"
-                android:scaleType="centerInside" />
+                android:padding="5dp"
+                android:paddingVertical="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_dry" />
 
         </LinearLayout>
 
