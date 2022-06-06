@@ -30,8 +30,17 @@
         <entry key="..\:/Users/user/Desktop/Laundry/app/src/main/res/layout/spinner_item.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/user/Desktop/Laundry/app/src/main/res/layout/texture_item.xml" value="0.24547101449275363" />
         <entry key="app/src/main/res/drawable/button_patten.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/ic_dry.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_dry_hook.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_dry_hook_under.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_dry_lie.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_dry_lie_under.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_menu_icon_svg.xml" value="0.231" />
+        <entry key="app/src/main/res/drawable/ic_wv_hd.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_wv_hd_not.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_wv_mc.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_wv_mc_not.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_rectangle.xml" value="0.24" />
         <entry key="app/src/main/res/layout/acitivity_closet.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_closet.xml" value="0.19746376811594202" />

@@ -14,9 +14,11 @@ import com.mobileteam.laundry.enums.Dry;
 import com.mobileteam.laundry.enums.DryClean;
 import com.mobileteam.laundry.enums.Iron;
 import com.mobileteam.laundry.enums.Temperature;
+import com.mobileteam.laundry.enums.TotalDry;
 import com.mobileteam.laundry.enums.WashingPower;
 import com.mobileteam.laundry.enums.WashingType;
 import com.mobileteam.laundry.enums.Weave;
+import com.mobileteam.laundry.enums.WeaveDry;
 
 import java.util.List;
 
@@ -123,6 +125,53 @@ public interface ClothesDao {
             Iron iron
     );
 
+    //dry 관련(임시)
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "INNER JOIN TEXTURES ON CLOTHES.id = TEXTURES.clothes_id " +
+            "WHERE dry = :totalDry" +
+            " AND weave =:weaveDry" +
+            " AND colors IN (:clothesColorList)" +
+            " AND TEXTURES.name IN (:textureList)")
+    public Single<List<Clothes>> findDryWithColorsTexture(
+            TotalDry totalDry,
+            WeaveDry weaveDry,
+            List<ClothesColor> clothesColorList,
+            List<String> textureList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "WHERE dry = :totalDry" +
+            " And weave = :weaveDry" +
+            " AND colors IN (:clothesColorList)")
+    public Single<List<Clothes>> findDryWithColors(
+            TotalDry totalDry,
+            WeaveDry weaveDry,
+            List<ClothesColor> clothesColorList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES, TEXTURES " +
+            "WHERE CLOTHES.id = TEXTURES.clothes_id" +
+            " AND dry = :totalDry" +
+            " AND weave = :weaveDry" +
+            " AND TEXTURES.name IN (:textureList)")
+    public Single<List<Clothes>> findDryWithTexture(
+            TotalDry totalDry,
+            WeaveDry weaveDry,
+            List<String> textureList
+    );
+
+    @Query("SELECT DISTINCT CLOTHES.id, washing_type, washing_power, detergent, temperature, colors, bleach, iron, dry_clean, weave, dry, image " +
+            "FROM CLOTHES " +
+            "WHERE dry = :totalDry" +
+            " AND weave = :weaveDry")
+    public Single<List<Clothes>> findDry(
+            TotalDry totalDry,
+            WeaveDry weaveDry
+    );
+
     @Query("SELECT * FROM CLOTHES WHERE id = :clothesId")
     public Single<Clothes> fineOne(long clothesId);
 
@@ -165,3 +214,4 @@ public interface ClothesDao {
     @Query("DELETE FROM CLOTHES WHERE id = :clothesId")
     public Single<Integer> delete(long clothesId);
 }
+
